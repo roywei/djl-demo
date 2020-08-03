@@ -72,11 +72,11 @@ public final class MultiEngine {
                         .optApplication(Application.CV.OBJECT_DETECTION)
                         .setTypes(Image.class, DetectedObjects.class)
                         .optProgress(new ProgressBar())
+                        .optArtifactId("ssd")
                         // We specify a resnet50 model that runs using the PyTorch engine here.
-                        .optFilter("size", "300")
-                        .optFilter("backbone", "resnet50")
-                        .optFilter("dataset", "coco")
-                        .optEngine("PyTorch") // Use PyTorch engine
+                        // .optFilter("backbone", "mobilenetv2")
+                        .optOption("Tags", new String[] {})
+                        .optEngine("TensorFlow") // Use PyTorch engine
                         .build();
 
         // Inference call to detect the person form the image.
@@ -89,7 +89,8 @@ public final class MultiEngine {
         // Get the first resulting image of the person and return it
         List<DetectedObjects.DetectedObject> items = detectedObjects.items();
         for (DetectedObjects.DetectedObject item : items) {
-            if ("person".equals(item.getClassName())) {
+            System.out.println(item.getClassName());
+            if ("Man".equals(item.getClassName())) {
                 Rectangle rect = item.getBoundingBox().getBounds();
                 int width = img.getWidth();
                 int height = img.getHeight();
