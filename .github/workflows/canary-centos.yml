@@ -16,7 +16,7 @@ on:
 
 jobs:
   canary-test-centos:
-    if: github.repository == 'aws-samples/djl-demo'
+
     runs-on: ubuntu-latest
     env:
       AWS_REGION: us-east-1
